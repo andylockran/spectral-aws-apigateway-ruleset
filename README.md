@@ -27,3 +27,5 @@ See: [Spectral Instructions for npm](https://meta.stoplight.io/docs/spectral/doc
 
 The severity of each of these rules has been tweaked to follow my own usage.  If you think the severity needs changing, or would prefer a more descriptive error message, please submit a PR.
 
+For instructions on how to do so, refer to [Custom Rulesets](https://meta.stoplight.io/docs/spectral/docs/guides/4-custom-rulesets.md) on the Spectral site.
+
