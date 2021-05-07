@@ -21,6 +21,8 @@ extends:
   - spectral-aws-apigateway-ruleset
 ```
 
+See: (https://meta.stoplight.io/docs/spectral/docs/guides/7-sharing-rulesets.md#npm)[Spectral Instructions for npm] for more details.
+
 ## Contributing
 
 The severity of each of these rules has been tweaked to follow my own usage.  If you think the severity needs changing, or would prefer a more descriptive error message, please submit a PR.
