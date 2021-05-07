@@ -1,14 +1,14 @@
 # These rules are a codified representation of https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html
 rules:
   aws-openapi-version:
-    description: "OpenAPI version must be 3.0.0"
+    description: "OpenAPI version must be 3.0.*"
     given: $.
     severity: error
     then:
       field: openapi
       function: pattern
       functionOptions:
-        match: "3.0.0"
+        match: "^3.0."
   
   aws-path-segments:
     description: 'Path segments can only contain alphanumeric characters, hyphens, periods, commas, and curly braces. Path parameters must be separate path segments. For example, "resource/{path_parameter_name}" is valid; "resource{path_parameter_name}" is not.'
