@@ -11,6 +11,12 @@ it's very easy for API developers to forget, or miss them.
 
 Spectral is an open source JSON/YAML linter, which allows you to create style guides for your structured data; things like OpenAPI/AsyncAPI/RAML descriptions, Kubernetes config, GitHub Actions, you name it, Spectral can help you lint it. Go beyond making sure they are “Technically Correct”, make sure they are useful.
 
+Try it out:
+
+If you've got npx installed, then you can run this ruleset with a single command, replacing $your_api.yml - with your API definition:
+
+`npx spectral lint -r https://raw.githubusercontent.com/andylockran/spectral-aws-apigateway-ruleset/main/aws_important_notes.yml $your_api.yaml`
+
 ## Instructions
 
 To use this ruleset, simply extend your .spectral.yml ruleset by adding a reference to this ruleset, eg:
