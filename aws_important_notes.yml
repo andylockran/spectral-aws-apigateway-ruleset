@@ -1,0 +1,136 @@
+# These rules are a codified representation of https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html
+rules:
+  aws-openapi-version:
+    description: "OpenAPI version must be 3.0.0"
+    given: $.
+    severity: error
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "3.0.0"
+  
+  aws-path-segments:
+    description: 'Path segments can only contain alphanumeric characters, hyphens, periods, commas, and curly braces. Path parameters must be separate path segments. For example, "resource/{path_parameter_name}" is valid; "resource{path_parameter_name}" is not.'
+    given: $.paths
+    severity: error
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^\/[A-Za-z0-9.,{}\/]+"
+  
+  aws-model-names:
+    description: 'Model names can only contain alphanumeric characters.'
+    given: $.components.schemas
+    severity: error
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^[A-Za-z0-9]+$"
+  
+  aws-allowed-parameters:
+    description: 'For input parameters, only the following attributes are supported: name, in, required, type, description. Other attributes are ignored.'
+    given: $.components.parameters.*
+    severity: warn
+    then:
+      field: "@key"
+      function: enumeration
+      functionOptions:
+        values: 
+        - name
+        - in
+        - required
+        - type
+        - description
+  
+  aws-securitySchemes:
+    description: 'The securitySchemes type, if used, must be of type apiKey.'
+    given: $.components.securitySchemes
+    severity: warn
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: "apiKey"
+  
+  aws-ignore-deprecated:
+    description: 'The deprecated field is not supported and is dropped in exported APIs.'
+    severity: warn
+    given: $..deprecated
+    then:
+      function: undefined
+  
+  aws-model-field-additionalProperties:
+    description: 'The additionalProperties field is not supported in Models.'
+    severity: error
+    given: $.components.schemas.*
+    then:
+      field: additionalProperties
+      function: undefined
+
+  aws-model-fields-anyOf:
+    description: 'The anyOf field is not supported in Models.'
+    severity: error
+    given: $.components.schemas.*
+    then:
+      field: anyOf
+      function: undefined
+  
+  aws-model-discriminator:
+    description: 'The discriminator parameter is not supported in any schema object.'
+    severity: error
+    given: $.components.schemas.*
+    then:
+      field: discriminator
+      function: undefined
+
+  aws-example-tag:
+    description: 'The example tag is not supported by API gateway, but there is no harm in including it.'
+    severity: hint
+    given: $..example
+    then:
+      function: undefined
+
+  aws-exclusive-minimum:
+    description: 'exclusiveMinimum is not supported by API Gateway'
+    severity: error
+    given: $..exclusiveMinimum
+    then:
+      function: undefined
+
+  aws-min-items:
+    description: 'The minItems tag is not included in simple request validation. To work around this, update the model after import before doing validation.'
+    severity: error
+    given: $..minItems
+    then:
+      function: undefined
+  
+  aws-max-items:
+    description: 'The maxItems tag is not included in simple request validation. To work around this, update the model after import before doing validation.'
+    severity: error
+    given: $..maxItems
+    then:
+      function: undefined
+  
+  aws-oneOf:
+    description: 'OneOf is not supported by API Gateway'
+    severity: error
+    given: $..oneOf
+    then:
+      function: undefined
+
+  aws-readOnly:
+    description: 'readOnly is not supported by API Gateway'
+    severity: warn
+    given: $..readOnly
+    then:
+      function: undefined
+    
+  aws-default:
+    description: 'default is not supported by API Gateway'
+    severity: error
+    given: $..default
+    then:
+      function: undefined

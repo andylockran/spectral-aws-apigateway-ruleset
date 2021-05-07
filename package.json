@@ -1,0 +1,19 @@
+{
+  "name": "spectral-aws-apigateway-ruleset",
+  "version": "0.0.1",
+  "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
+  "main": "aws_important_notes.yml",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andylockran/spectral-aws-apigateway-ruleset"
+  },
+  "keywords": [
+    "spectral",
+    "openapi",
+    "aws",
+    "apigateway"
+  ],
+  "author": "Andy Loughran",
+  "license": "Apache-2.0"
+}
