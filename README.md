@@ -21,6 +21,12 @@ extends:
   - spectral-aws-apigateway-ruleset
 ```
 
+This pulls the definition directly from npm, do you don't have to even install it!
+
+## NPM package
+
+[spectral-aws-apigateway-ruleset](https://www.npmjs.com/package/spectral-aws-apigateway-ruleset)
+
 See: [Spectral Instructions for npm](https://meta.stoplight.io/docs/spectral/docs/guides/7-sharing-rulesets.md#npm) for more details.
 
 ## Contributing
