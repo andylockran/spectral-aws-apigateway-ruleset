@@ -131,6 +131,7 @@ rules:
   aws-default:
     description: 'default is not supported by API Gateway'
     severity: error
-    given: $..default
+    given: $.components.schemas.*.properties.*
     then:
+      field: default
       function: undefined
