@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
   "main": "aws_important_notes.yml",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/andylockran/spectral-aws-apigateway-ruleset"
@@ -18,5 +20,13 @@
   "license": "Apache-2.0",
   "dependencies": {
     "ajv": "^6.12.3"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.1",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3"
+  },
+  "jest": {
+    "verbose": true
   }
 }

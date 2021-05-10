@@ -3,7 +3,7 @@ const draft4MetaSchema = require("ajv/lib/refs/json-schema-draft-04.json")
 
 
 const ajv = new Ajv({
-    schemaId: "id",
+    schemaId: "auto",
     strict: true,
     strictKeywords: true,
     strictDefaults: true
@@ -16,7 +16,6 @@ module.exports = (targetVal) => {
         ajv.compile(targetVal);
     }
     catch (error) {
-
         return [ 
             { 
                 message: `Not valid JSONSchema4: ${error}`,
