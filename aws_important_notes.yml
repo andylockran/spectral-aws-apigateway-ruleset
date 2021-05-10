@@ -1,3 +1,5 @@
+functions:
+  - draft4
 # These rules are a codified representation of https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html
 rules:
   aws-openapi-version:
