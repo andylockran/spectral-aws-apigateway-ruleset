@@ -15,5 +15,8 @@
     "apigateway"
   ],
   "author": "Andy Loughran",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ajv": "^6.12.3"
+  }
 }
