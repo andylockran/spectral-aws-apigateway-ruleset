@@ -43,3 +43,4 @@ The severity of each of these rules has been tweaked to follow my own usage.  If
 
 For instructions on how to do so, refer to [Custom Rulesets](https://meta.stoplight.io/docs/spectral/docs/guides/4-custom-rulesets.md) on the Spectral site.
 
+Please modify webpack.config.js if you're adding new custom functions, and make sure that they're compatible with webpack by running `npm 

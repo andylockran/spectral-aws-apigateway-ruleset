@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
   "main": "aws_important_notes.yml",
+  "type": "module",
   "scripts": {
     "clean": "rm -rf functions/",
     "build": "webpack",
@@ -33,7 +34,8 @@
   },
   "jest": {
     "verbose": true,
-    "moduleFileExtensions": ["js", "json", "mjs", "jsx", "ts", "tsx", "node"],
-    "transform": {}
+    "transform": {
+      "^.+\\.mjs?$": "babel-jest"
+    }
   }
 }
