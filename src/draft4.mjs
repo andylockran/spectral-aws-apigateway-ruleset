@@ -11,7 +11,11 @@ const ajv = new Ajv({
 ajv.addMetaSchema(draft4MetaSchema)
 ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-example-tag` rule.
 
-module.exports = (targetVal) => {
+// function validate_json() {
+    
+// };
+
+module.exports = targetVal => {
     try {
         ajv.compile(targetVal);
     }
@@ -22,4 +26,4 @@ module.exports = (targetVal) => {
             }
         ]
     }
-};
+}
