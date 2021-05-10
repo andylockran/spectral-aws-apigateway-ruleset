@@ -9,7 +9,7 @@ const ajv = new Ajv({
     strictDefaults: true
     });
 ajv.addMetaSchema(draft4MetaSchema)
-ajv.addKeyword("example"); // Added 'example' keyword as other rules pick up on this.
+ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-example-tag` rule.
 
 module.exports = (targetVal) => {
     try {
