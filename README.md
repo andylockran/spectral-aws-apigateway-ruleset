@@ -27,7 +27,9 @@ extends:
   - spectral-aws-apigateway-ruleset
 ```
 
-This pulls the definition directly from npm, do you don't have to even install it!
+This pulls the definition directly from npm, so you don't have to even install it!
+
+N.B. I've used webpack for the rules and dependencies, so the rules work without the install too! 
 
 ## NPM package
 

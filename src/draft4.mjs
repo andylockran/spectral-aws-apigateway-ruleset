@@ -1,7 +1,6 @@
 import ajv, { ErrorObject } from 'ajv';
 import * as draft4MetaSchema from "ajv/lib/refs/json-schema-draft-04.json"
 
-
 const ajvValidator = ajv({
     schemaId: "auto",
     strict: true,
