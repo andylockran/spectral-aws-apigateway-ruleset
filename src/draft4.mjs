@@ -1,15 +1,15 @@
-const Ajv = require("ajv")
-const draft4MetaSchema = require("ajv/lib/refs/json-schema-draft-04.json")
+import ajv, { ErrorObject } from 'ajv';
+import * as draft4MetaSchema from "ajv/lib/refs/json-schema-draft-04.json"
 
 
-const ajv = new Ajv({
+const ajvValidator = ajv({
     schemaId: "auto",
     strict: true,
     strictKeywords: true,
     strictDefaults: true
     });
-ajv.addMetaSchema(draft4MetaSchema)
-ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-example-tag` rule.
+ajvValidator.addMetaSchema(draft4MetaSchema)
+ajvValidator.addKeyword("example"); // Added 'example' keyword as picked up by `aws-example-tag` rule.
 
 // function validate_json() {
     
@@ -17,7 +17,7 @@ ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-examp
 
 module.exports = targetVal => {
     try {
-        ajv.compile(targetVal);
+        ajvValidator.compile(targetVal);
     }
     catch (error) {
         return [ 
