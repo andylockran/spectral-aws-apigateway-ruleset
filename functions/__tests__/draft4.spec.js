@@ -18,10 +18,9 @@ describe("JSONSchema Draft-4", () => {
                 ]
               }
     const output = undefined;
-    console.log(draft4(input));
     expect(draft4(input)).toEqual(output);
     });
-    
+
     test("An invalid JSON Schema should fail with an errors", () => {
       const input = {
               "type": "object",
@@ -44,7 +43,6 @@ describe("JSONSchema Draft-4", () => {
       message: 'Not valid JSONSchema4: Error: unknown format "string" is used in schema at path "#/properties/name"'
     }
   ];
-  console.log(draft4(input));
   expect(draft4(input)).toEqual(output);
   });
   });
