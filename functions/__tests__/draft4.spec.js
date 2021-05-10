@@ -21,6 +21,7 @@ describe("JSONSchema Draft-4", () => {
     console.log(draft4(input));
     expect(draft4(input)).toEqual(output);
     });
+    
     test("An invalid JSON Schema should fail with an errors", () => {
       const input = {
               "type": "object",
