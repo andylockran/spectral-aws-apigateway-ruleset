@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Add
+
+- added a draft-4 schema checker, which qualifies for a major version bump as this is a good, but blocking rule.
+
 ## [0.0.4] - 2021-05-07
 
 ### Fixed

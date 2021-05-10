@@ -135,3 +135,10 @@ rules:
     then:
       field: default
       function: undefined
+  
+  schemas-jsonschema-draft4:
+    description: "All schemas must be aligned with JSONSchema Draft-4"
+    message: "{{error}}"
+    given: $.components.schemas.*
+    then:
+      function: draft4
