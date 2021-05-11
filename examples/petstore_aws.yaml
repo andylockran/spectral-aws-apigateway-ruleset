@@ -1,0 +1,105 @@
+openapi: "3.0.1"
+info:
+  version: 1.0.0
+  contact: 
+    email: andy@zrmt.com
+  title: AWS APi Gateway Petstore
+  license:
+    name: MIT
+  description: An example API Gateway for AWS API Gateway
+servers:
+  - url: https://example.com
+    variables:
+      basePath:
+        default: /
+    description: Main
+tags:
+  - name: Example
+    description: An example tag
+  - name: pets
+    description: Endpoints related to pets
+paths:
+  /pets:
+    get:
+      description: List all pets
+      summary: List all pets
+      operationId: listPets
+      tags:
+        - pets
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A paged array of pets
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Pets"
+    post:
+      description: Create a pet
+      summary: Create a pet
+      operationId: createPets
+      tags:
+        - pets
+      responses:
+        "201":
+          description: Null response
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Error"
+  /pets/{petId}:
+    get:
+      description: Get information for a specific pet
+      summary: Info for a specific pet
+      operationId: showPetById
+      tags:
+        - pets
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          description: The id of the pet to retrieve
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Pet"
+components:
+  schemas:
+    Pet:
+      type: "object"
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        tag:
+          type: string
+    Pets:
+      type: array
+      items:
+        $ref: '#/components/schemas/Pet'
+    Error:
+      type: "object"
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
