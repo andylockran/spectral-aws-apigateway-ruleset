@@ -1,10 +1,13 @@
 {
   "name": "spectral-aws-apigateway-ruleset",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
   "main": "aws_important_notes.yml",
   "scripts": {
-    "test": "jest"
+    "clean": "rm -rf functions/",
+    "build": "webpack",
+    "test": "jest",
+    "test-build": "cp src/draft4.mjs functions/draft4.js && jest"
   },
   "repository": {
     "type": "git",
@@ -24,9 +27,19 @@
   "devDependencies": {
     "@babel/preset-env": "^7.14.1",
     "babel-jest": "^26.6.3",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0"
   },
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "collectCoverage": true,
+    "moduleFileExtensions": ["js", "json", "mjs", "jsx", "ts", "tsx", "node"],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.mjs$": "babel-jest"
+    },
+   
+    "testRegex": "((\\.|/*.)(spec))\\.js?$"
   }
 }
