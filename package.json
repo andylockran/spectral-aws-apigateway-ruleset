@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.1",
+    "@stoplight/spectral": "^5.9.1",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "webpack": "^5.37.0",
@@ -34,12 +35,19 @@
   "jest": {
     "verbose": true,
     "collectCoverage": true,
-    "moduleFileExtensions": ["js", "json", "mjs", "jsx", "ts", "tsx", "node"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "mjs",
+      "jsx",
+      "ts",
+      "tsx",
+      "node"
+    ],
     "transform": {
       "^.+\\.js$": "babel-jest",
       "^.+\\.mjs$": "babel-jest"
     },
-   
     "testRegex": "((\\.|/*.)(spec))\\.js?$"
   }
 }
