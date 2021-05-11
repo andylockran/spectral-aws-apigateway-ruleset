@@ -32,6 +32,7 @@
     "webpack-cli": "^4.7.0"
   },
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "moduleFileExtensions": ["js", "json", "mjs", "jsx", "ts", "tsx", "node"]
   }
 }

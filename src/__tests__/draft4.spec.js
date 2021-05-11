@@ -1,4 +1,4 @@
-import draft4 from "../../functions/draft4";
+import draft4 from "../draft4";
 
 describe("JSONSchema Draft-4", () => {
   test("A valid JSON Schema should pass with no errors", () => {
