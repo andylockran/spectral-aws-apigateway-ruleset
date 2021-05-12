@@ -8,7 +8,7 @@ info:
     name: MIT
   description: An example API Gateway for AWS API Gateway
 servers:
-  - url: https://example.com
+  - url: https://petstoreapi.example.com
     variables:
       basePath:
         default: /
@@ -18,63 +18,123 @@ tags:
     description: An example tag
   - name: pets
     description: Endpoints related to pets
+
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+x-amazon-apigateway-request-validator: all
+
 paths:
   /pets:
     get:
       description: List all pets
-      summary: List all pets
-      operationId: listPets
+      operationId: "listPets"
       tags:
         - pets
       parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          schema:
-            type: string
+      - name: "limit"
+        in: "query"
+        schema:
+          type: "string"
       responses:
         "200":
-          description: A paged array of pets
+          description: "200 response"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Pets"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
     post:
-      description: Create a pet
-      summary: Create a pet
-      operationId: createPets
+      description: Updated Pet
       tags:
         - pets
+      operationId: "createPets"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pet"
+        required: true
       responses:
-        "201":
-          description: Null response
+        "404":
+          description: "404 response"
           content:
             application/json:
-              schema: 
-                type: array
-                items: 
-                  $ref: "#/components/schemas/Error"
+              schema:
+                $ref: "#/components/schemas/Error"
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pet"
+        "201":
+          description: "201 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfError"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "never"
+        type: "mock"
   /pets/{petId}:
     get:
-      description: Get information for a specific pet
-      summary: Info for a specific pet
-      operationId: showPetById
+      description: Upload pet
       tags:
         - pets
+      operationId: "showPetById"
       parameters:
-        - name: petId
-          in: path
-          required: true
-          description: The id of the pet to retrieve
-          schema:
-            type: string
+      - name: "petId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
-          description: Expected response to a valid request
+          description: "200 response"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/Pet"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
 components:
   schemas:
     Pet:
@@ -89,6 +149,7 @@ components:
           type: string
         tag:
           type: string
+      additionalProperties: true
     Pets:
       type: array
       items:
@@ -103,3 +164,33 @@ components:
           type: integer
         message:
           type: string
+    ArrayOfError:
+      type: "array"
+      items: 
+        $ref: "#/components/schemas/Error"
+      additionalProperties: true
+  responses:
+    BadRequest:
+      description: The request was badly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The item was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorised:
+      description: Unauthorised. The client lacks authentication credentials for this request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden. The authenticated client is not allowed to perform the request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
