@@ -41,3 +41,6 @@ The severity of each of these rules has been tweaked to follow my own usage.  If
 
 For instructions on how to do so, refer to [Custom Rulesets](https://meta.stoplight.io/docs/spectral/docs/guides/4-custom-rulesets.md) on the Spectral site.
 
+## Licence         
+
+This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/andylockran/spectral-aws-apigateway-ruleset) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
