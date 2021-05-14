@@ -34,7 +34,7 @@ rules:
   
   aws-allowed-parameters:
     description: 'For input parameters, only the following attributes are supported: name, in, required, type, description. Other attributes are ignored.'
-    given: $..requestBody.content.*.schema.*
+    given: $.components.parameters.*
     severity: warn
     then:
       field: "@key"
