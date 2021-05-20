@@ -17,16 +17,8 @@ describe("AWS Important Notes", () => {
             .then(() => done());
     })
 
-    itif(true)("The petstore in the examples folder is a valid document", done => {
+    it("The petstore example in the examples folder is a valid document", done => {
         spectral.run(petstore)
-            .then(results => {
-                expect(results).toEqual([]);
-                done();
-            });
-    });
-
-    itif(true)("The supported in the examples folder is a valid document", done => {
-        spectral.run(supported)
             .then(results => {
                 expect(results).toEqual([]);
                 done();
@@ -51,17 +43,37 @@ describe("AWS Important Notes", () => {
                 done();
             });
     })
-
-    it("should validate that the example document has no path errors.", done => {
+    it("should throw an error if a Model name is not alpha numeric", done => {
         /*
-        Path segments can only contain alphanumeric characters, hyphens, periods, commas, and curly braces.
-        Path parameters must be separate path segments.
-        For example,
-            "resource/{path_parameter_name}" is valid;
-            "resource{path_parameter_name}" is not. 
+        Model names can only contain alphanumeric characters.
         */
         let input = yaml.load(petstore);
-        
+        input.components.schemas['Err0r_Schema!'] = input.components.schemas['Pet']
+        spectral.run(input)
+            .then(results => {
+                expect(results[0].code).toEqual('aws-model-names');
+                done();
+            });
+
+    });
+    
+    it("should validate input parameters", done => {
+        /*
+
+        This appears to vary based on the definition being Swagger or OpenAPIv3.
+        It also allows the 'schema' property, and doesn't ignore it, because it's
+        not an attribute.?  Need to work out how to codify that.
+
+        For input parameters, only the following attributes are supported:
+        - name, 
+        - in, 
+        - required,
+        - type,
+        - description.
+        Other attributes are ignored. 
+        */
+        let input = yaml.load(petstore);
+        input.paths['/pets'].post
         spectral.run(input)
             .then(results => {
                 expect(results).toEqual([]);
