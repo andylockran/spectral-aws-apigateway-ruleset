@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf functions/",
     "build": "webpack",
-    "test": "jest",
+    "test": "npm run build && jest",
     "test-build": "cp src/draft4.mjs functions/draft4.js && jest"
   },
   "repository": {

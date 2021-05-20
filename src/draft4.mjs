@@ -11,10 +11,6 @@ const ajvValidator = ajv({
 ajvValidator.addMetaSchema(draft4MetaSchema)
 ajvValidator.addKeyword("example"); // Added 'example' keyword as picked up by `aws-example-tag` rule.
 
-// function validate_json() {
-    
-// };
-
 module.exports = targetVal => {
     try {
         ajvValidator.compile(targetVal);

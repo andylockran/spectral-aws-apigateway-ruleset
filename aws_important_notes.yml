@@ -20,7 +20,7 @@ rules:
       field: "@key"
       function: pattern
       functionOptions:
-        match: "^\/[A-Za-z0-9.,{}\/]+"
+        match: "^(\/[\\w\\.\\,\\-]+|\/{[\\w\\-]+\\})+$"
   
   aws-model-names:
     description: 'Model names can only contain alphanumeric characters.'
