@@ -33,7 +33,7 @@ describe("AWS Important Notes", () => {
             });
     });
 
-    it("should throw error if path segment bad.", done => {
+    it("should throw error if path segment invalid.", done => {
         /*
         Path segments can only contain alphanumeric characters, hyphens, periods, commas, and curly braces.
         Path parameters must be separate path segments.
@@ -48,6 +48,23 @@ describe("AWS Important Notes", () => {
         spectral.run(input)
             .then(results => {
                 expect(results[0].code).toEqual('aws-path-segments')
+                done();
+            });
+    })
+
+    it("should validate that the example document has no path errors.", done => {
+        /*
+        Path segments can only contain alphanumeric characters, hyphens, periods, commas, and curly braces.
+        Path parameters must be separate path segments.
+        For example,
+            "resource/{path_parameter_name}" is valid;
+            "resource{path_parameter_name}" is not. 
+        */
+        let input = yaml.load(petstore);
+        
+        spectral.run(input)
+            .then(results => {
+                expect(results).toEqual([]);
                 done();
             });
     })
