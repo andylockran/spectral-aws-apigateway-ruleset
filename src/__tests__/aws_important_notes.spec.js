@@ -71,6 +71,16 @@ describe("AWS Important Notes", () => {
         - type,
         - description.
         Other attributes are ignored. 
+
+        ** Addendum **
+
+        But if in is "body":
+            - schema is Required. 
+
+            If in is any value other than "body":
+            - type is Required. 
+            - if type is "array".	
+                - items is Required.
         */
         let input = yaml.load(petstore);
         input.paths['/pets'].post

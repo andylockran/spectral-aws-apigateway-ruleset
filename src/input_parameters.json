@@ -25,5 +25,33 @@
       "items": {
           "type": "object"
       }
-    }
+    },
+    "allOf": [
+        {
+            "if":{
+                "properties" : { "type": { "const": "array" }},
+                "required": ["type"]
+            },
+            "then": {
+                "required": ["items"] 
+            },
+            "else": {
+                "required": ["description", "name", "in"]
+            }
+        },
+        {   
+            "if":{
+                "properties" : { "in": { "const": "body" } }
+            },
+            "then": {
+                "required": ["schema"] 
+            },
+            "else": {
+                "required": ["description", "name", "in"]
+            }
+        },
+        {
+            "required": ["in","name","description"]
+        }
+    ]
   } 
