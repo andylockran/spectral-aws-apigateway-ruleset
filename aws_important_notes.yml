@@ -55,6 +55,7 @@ rules:
         - schema
         - example
         - examples
+        - content
 
   
   aws-securitySchemes:
