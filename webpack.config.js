@@ -3,6 +3,7 @@ const path = require("path");
 module.exports = {
   entry: {
     draft4: "./src/draft4.mjs",
+    input_parameters: "./src/input_parameters.mjs"
   },
   mode: "production",
   // experiments: {

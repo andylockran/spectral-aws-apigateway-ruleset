@@ -1,0 +1,29 @@
+{
+    "$id": "https://raw.githubusercontent.com/andylockran/spectral-aws-apigateway-ruleset/main/src/input_paramters.schema.json",
+    "title": "Input Parameters",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "in": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      },
+      "description": {
+          "type": "string"
+      },
+      "schema": {
+          "type": "object"
+      },
+      "example": {
+          "type": "string"
+      },
+      "items": {
+          "type": "object"
+      }
+    }
+  } 

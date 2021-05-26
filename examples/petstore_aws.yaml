@@ -39,6 +39,7 @@ paths:
             application/json:
               schema: 
                 $ref: "#/components/schemas/Pets"
+
     post:
       description: Create a pet
       summary: Create a pet

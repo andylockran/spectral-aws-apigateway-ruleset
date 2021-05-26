@@ -1,5 +1,6 @@
 functions:
   - draft4
+  - input_parameters
 # These rules are a codified representation of https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html
 rules:
   aws-openapi-version:
@@ -35,17 +36,10 @@ rules:
   aws-allowed-parameters:
     description: 'For input parameters, only the following attributes are supported: name, in, required, type, description. Other attributes are ignored.'
     given: $.components.parameters.*
+    message: "{{error}}"
     severity: warn
     then:
-      field: "@key"
-      function: enumeration
-      functionOptions:
-        values: 
-        - name
-        - in
-        - required
-        - type
-        - description
+      function: input_parameters
   
   aws-securitySchemes:
     description: 'The securitySchemes type, if used, must be of type apiKey.'
