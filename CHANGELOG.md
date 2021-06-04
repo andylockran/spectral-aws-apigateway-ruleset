@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## Unreleased
+## [1.0.2] - 2021-06-04
+
+- downgraded additionalProperties to a hint, as is supported by API Gateway.
+- Upgraded to ajv 8.5.0 to take advantage of the new ajv-draft-04 library
+- Added ajv-formats to allow the subset of formats available in draft-04, as published https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00#section-7.2
 ## [1.0.1] - 2021-05-10
 
 - added draft-4 schema checking rule & function
