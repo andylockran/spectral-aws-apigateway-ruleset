@@ -65,12 +65,12 @@ rules:
       function: undefined
   
   aws-model-field-additionalProperties:
-    description: 'The additionalProperties field is not supported in Models.'
-    severity: error
+    description: 'The additionalProperties field is supported in Models.  However, if you remove it, it will remain set to the last value specified.'
+    severity: hint
     given: $.components.schemas.*
     then:
       field: additionalProperties
-      function: undefined
+      function: defined
 
   aws-model-fields-anyOf:
     description: 'The anyOf field is not supported in Models.'
