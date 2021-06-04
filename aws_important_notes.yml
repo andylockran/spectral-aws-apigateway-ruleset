@@ -101,20 +101,6 @@ rules:
     given: $..exclusiveMinimum
     then:
       function: undefined
-
-  aws-min-items:
-    description: 'The minItems tag is not included in simple request validation. To work around this, update the model after import before doing validation.'
-    severity: error
-    given: $..minItems
-    then:
-      function: undefined
-  
-  aws-max-items:
-    description: 'The maxItems tag is not included in simple request validation. To work around this, update the model after import before doing validation.'
-    severity: error
-    given: $..maxItems
-    then:
-      function: undefined
   
   aws-oneOf:
     description: 'OneOf is not supported by API Gateway'
