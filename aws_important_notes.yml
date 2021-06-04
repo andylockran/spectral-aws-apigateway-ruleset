@@ -65,7 +65,7 @@ rules:
       function: undefined
   
   aws-model-field-additionalProperties:
-    description: 'The additionalProperties field is supported in Models.'
+    description: 'The additionalProperties field is supported in Models.  However, if you remove it, it will remain set to the last value specified.'
     severity: hint
     given: $.components.schemas.*
     then:
