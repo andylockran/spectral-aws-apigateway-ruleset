@@ -22,7 +22,8 @@
   "author": "Andy Loughran",
   "license": "Apache-2.0",
   "dependencies": {
-    "ajv": "^6.12.3"
+    "ajv": "^8.5.0",
+    "ajv-draft-04": "^1.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.1",
@@ -34,12 +35,19 @@
   "jest": {
     "verbose": true,
     "collectCoverage": true,
-    "moduleFileExtensions": ["js", "json", "mjs", "jsx", "ts", "tsx", "node"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "mjs",
+      "jsx",
+      "ts",
+      "tsx",
+      "node"
+    ],
     "transform": {
       "^.+\\.js$": "babel-jest",
       "^.+\\.mjs$": "babel-jest"
     },
-   
     "testRegex": "((\\.|/*.)(spec))\\.js?$"
   }
 }

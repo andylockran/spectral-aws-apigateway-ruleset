@@ -1,14 +1,7 @@
-import ajv, { ErrorObject } from 'ajv';
-import * as draft4MetaSchema from "ajv/lib/refs/json-schema-draft-04.json"
+import Ajv from "ajv-draft-04"
 
 
-const ajvValidator = ajv({
-    schemaId: "auto",
-    strict: true,
-    strictKeywords: true,
-    strictDefaults: true
-    });
-ajvValidator.addMetaSchema(draft4MetaSchema)
+const ajvValidator = new Ajv();
 ajvValidator.addKeyword("example"); // Added 'example' keyword as picked up by `aws-example-tag` rule.
 
 // function validate_json() {
