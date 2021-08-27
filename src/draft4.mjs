@@ -1,5 +1,7 @@
 import Ajv from "ajv-draft-04"
 import addFormats from "ajv-formats"
+const {JSONPath} = require('jsonpath-plus');
+
 
 const ajv = new Ajv({
     "strict": true,
@@ -13,7 +15,7 @@ ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-examp
 // };
 
 module.exports = (targetVal, _opts, context) => {
-    let openapi = JSON.parse(JSON.stringify(targetVal))
+    let openapi = targetVal
     const results = []
 
     const schemaList = openapi.components.schemas
@@ -21,7 +23,14 @@ module.exports = (targetVal, _opts, context) => {
         if (Object.prototype.hasOwnProperty.call(schemaList, property)) {
             const schema_model = schemaList[property]
             schema_model.id = `#/components/schemas/${property}`
-            ajv.addSchema(schemaList[property])
+            try {
+                let schema = schemaList[property]
+                ajv.addSchema(schema)
+            }
+            catch (error) {
+                console.log(`${property} failed to add due to ${error}`)
+            }
+            
         }
     }
     for (const property in schemaList) {
