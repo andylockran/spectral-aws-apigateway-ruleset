@@ -1,6 +1,7 @@
 import Ajv from "ajv-draft-04"
 import addFormats from "ajv-formats"
-const {JSONPath} = require('jsonpath-plus');
+const yaml = require('js-yaml');
+const fs   = require('fs');
 
 
 const ajv = new Ajv({
