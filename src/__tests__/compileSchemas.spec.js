@@ -1,0 +1,321 @@
+import compileSchemas from "../compileSchemas";
+
+describe("JSONSchema Compile All", () => {
+    test("A schema should compile across all $refs", () => {
+      const input = {
+        "openapi": "3.0.1",
+        "info": {
+          "version": "1.0.0",
+          "contact": {
+            "email": "andy@zrmt.com"
+          },
+          "title": "AWS APi Gateway Petstore",
+          "license": {
+            "name": "MIT"
+          },
+          "description": "An example API Gateway for AWS API Gateway"
+        },
+        "servers": [
+          {
+            "url": "https://petstoreapi.example.com",
+            "variables": {
+              "basePath": {
+                "default": "/"
+              }
+            },
+            "description": "Main"
+          }
+        ],
+        "tags": [
+          {
+            "name": "Example",
+            "description": "An example tag"
+          },
+          {
+            "name": "pets",
+            "description": "Endpoints related to pets"
+          }
+        ],
+        "x-amazon-apigateway-request-validators": {
+          "all": {
+            "validateRequestBody": true,
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-request-validator": "all",
+        "paths": {
+          "/pets": {
+            "get": {
+              "description": "List all pets",
+              "operationId": "listPets",
+              "tags": [
+                "pets"
+              ],
+              "parameters": [
+                {
+                  "name": "limit",
+                  "in": "query",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "200 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Pets"
+                      }
+                    }
+                  }
+                }
+              },
+              "x-amazon-apigateway-integration": {
+                "responses": {
+                  "default": {
+                    "statusCode": "200"
+                  }
+                },
+                "requestTemplates": {
+                  "application/json": "{\"statusCode\": 200}"
+                },
+                "passthroughBehavior": "when_no_match",
+                "type": "mock"
+              }
+            },
+            "post": {
+              "description": "Updated Pet",
+              "tags": [
+                "pets"
+              ],
+              "operationId": "createPets",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Pet"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "200 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Pet"
+                      }
+                    }
+                  }
+                },
+                "201": {
+                  "description": "201 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/ArrayOfError"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "400 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Error"
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "401 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Error"
+                      }
+                    }
+                  }
+                },
+                "403": {
+                  "description": "403 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Error"
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "404 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Error"
+                      }
+                    }
+                  }
+                }
+              },
+              "x-amazon-apigateway-integration": {
+                "responses": {
+                  "default": {
+                    "statusCode": "200"
+                  }
+                },
+                "requestTemplates": {
+                  "application/json": "{\"statusCode\": 200}"
+                },
+                "passthroughBehavior": "never",
+                "type": "mock"
+              }
+            }
+          },
+          "/pets/{petId}": {
+            "get": {
+              "description": "Upload pet",
+              "tags": [
+                "pets"
+              ],
+              "operationId": "showPetById",
+              "parameters": [
+                {
+                  "name": "petId",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "200 response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Pet"
+                      }
+                    }
+                  }
+                }
+              },
+              "x-amazon-apigateway-integration": {
+                "responses": {
+                  "default": {
+                    "statusCode": "200",
+                    "responseTemplates": {
+                      "application/json": "{\"statusCode\": 200}"
+                    }
+                  }
+                },
+                "passthroughBehavior": "when_no_match",
+                "type": "mock"
+              }
+            }
+          }
+        },
+        "components": {
+          "schemas": {
+            "Pet": {
+              "type": 'object',
+              "additionalProperties": true,
+              "required": [
+                "id",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              }
+              
+            },
+            "Pets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            },
+            "Error": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            },
+            "ArrayOfError": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Error"
+              }
+            }
+          },
+          "responses": {
+            "BadRequest": {
+              "description": "The request was badly formed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "NotFound": {
+              "description": "The item was not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "Unauthorised": {
+              "description": "Unauthorised. The client lacks authentication credentials for this request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "Forbidden": {
+              "description": "Forbidden. The authenticated client is not allowed to perform the request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      const output = undefined;
+      expect(compileSchemas(input)).toEqual(output);
+    })
+})

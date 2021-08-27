@@ -130,3 +130,10 @@ rules:
     given: $.components.schemas.*
     then:
       function: draft4
+
+  schemas-compile:
+    description: "The $refs related to all teh schemas compile"
+    message: "{{error}}"
+    given: $.components.schemas
+    then:
+      function: compileAll
