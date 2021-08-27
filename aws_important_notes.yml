@@ -124,9 +124,9 @@ rules:
       field: default
       function: undefined
 
-  schemas-compile:
-    description: "The $refs related to all the schemas compile"
+  jsonschema-draft4-validation:
+    description: "The model schemas are valid"
     message: "{{error}}"
-    given: $
+    given: "$"
     then:
       function: draft4
