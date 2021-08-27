@@ -123,17 +123,10 @@ rules:
     then:
       field: default
       function: undefined
-  
-  schemas-jsonschema-draft4:
-    description: "All schemas must be aligned with JSONSchema Draft-4"
-    message: "{{error}}"
-    given: $.components.schemas.*
-    then:
-      function: draft4
 
   schemas-compile:
-    description: "The $refs related to all teh schemas compile"
+    description: "The $refs related to all the schemas compile"
     message: "{{error}}"
-    given: $.components.schemas
+    given: $
     then:
-      function: compileAll
+      function: draft4

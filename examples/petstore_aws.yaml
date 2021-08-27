@@ -168,7 +168,6 @@ components:
       type: "array"
       items: 
         $ref: "#/components/schemas/Error"
-      additionalProperties: true
   responses:
     BadRequest:
       description: The request was badly formed
