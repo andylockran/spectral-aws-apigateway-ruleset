@@ -1,8 +1,5 @@
 import Ajv from "ajv-draft-04"
 import addFormats from "ajv-formats"
-const yaml = require('js-yaml');
-const fs   = require('fs');
-
 
 const ajv = new Ajv({
     "strict": true,
@@ -16,7 +13,7 @@ ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-examp
 // };
 
 module.exports = (targetVal, _opts, context) => {
-    let openapi = targetVal
+    let openapi = JSON.parse(JSON.stringify(targetVal))
     const results = []
 
     const schemaList = openapi.components.schemas
