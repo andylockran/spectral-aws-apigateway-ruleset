@@ -1,10 +1,14 @@
 import Ajv from "ajv-draft-04"
-import addFormats from "ajv-formats"
+// import addFormats from "ajv-formats"
 
 const ajv = new Ajv({
     "strict": true,
+    "formats": false
 });
-addFormats(ajv, ["date-time","email","hostname","ipv4","ipv6","uri"])
+
+// Removed the checking of formats, as AWS API Gateway has additional formats, and
+// will delegate to specific rules to make easier to spot compatible/incompatible formats.
+//addFormats(ajv, ["date-time","email","hostname","ipv4","ipv6","uri"])
     
 ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-example-tag` rule.
 

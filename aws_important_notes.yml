@@ -101,6 +101,22 @@ rules:
     given: $..exclusiveMinimum
     then:
       function: undefined
+
+  aws-supported-formats:
+    description: "Format not supported by JSONSchema4, therefore may be ignored"
+    severity: hint
+    given: $..format
+    then:
+      field: "@key"
+      function: enumeration
+      functionOptions:
+        values: 
+        - date-time
+        - email
+        - hostname
+        - ipv4
+        - ipv6
+        - uri
   
   aws-oneOf:
     description: 'OneOf is not supported by API Gateway'
