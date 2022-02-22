@@ -60,8 +60,9 @@ rules:
   aws-ignore-deprecated:
     description: 'The deprecated field is not supported and is dropped in exported APIs.'
     severity: warn
-    given: $..deprecated
+    given: $.paths[*][*]
     then:
+      field: deprecated
       function: undefined
   
   aws-model-field-additionalProperties:

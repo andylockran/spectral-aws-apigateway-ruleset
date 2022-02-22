@@ -1,5 +1,4 @@
 import Ajv from "ajv-draft-04"
-// import addFormats from "ajv-formats"
 
 const ajv = new Ajv({
     "strict": true,
