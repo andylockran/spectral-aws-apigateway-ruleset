@@ -33,7 +33,7 @@ rules:
         match: "^[A-Za-z0-9]+$"
   
   aws-allowed-parameters:
-    description: 'For input parameters, only the following attributes are supported: name, in, required, type, description. Other attributes are ignored.'
+    description: 'For input parameters, only the following attributes are supported: name, in, required, type, description. Other attributes are ignored.\n Note that this means "schema" definitions are not applied to input parameters during basic validation in the header or querystring.'
     given: $.components.parameters.*
     severity: warn
     then:
