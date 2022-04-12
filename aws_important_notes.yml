@@ -144,7 +144,7 @@ rules:
   aws-proxy:
     description: 'passThroughBehaviour is ignored when aws_proxy type is set'
     severity: warn
-    given: $..x-amazon-apigateway-integration[?(@ == "aws_proxy")
+    given: $..x-amazon-apigateway-integration[?(@property === 'type' && @ == "aws_proxy")
     then: 
       field: passthroughBehavior
       function: undefined
