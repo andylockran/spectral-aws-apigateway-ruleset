@@ -2,7 +2,7 @@ import Ajv from "ajv-draft-04"
 
 const ajv = new Ajv({
     "strict": true,
-    "formats": false
+    "validateFormats": false
 });
 
 // Removed the checking of formats, as AWS API Gateway has additional formats, and
