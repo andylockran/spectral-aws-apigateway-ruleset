@@ -119,13 +119,6 @@ rules:
         - ipv6
         - uri
   
-  aws-oneOf:
-    description: 'OneOf is not supported by API Gateway'
-    severity: error
-    given: $..oneOf
-    then:
-      function: undefined
-
   aws-readOnly:
     description: 'readOnly is not supported by API Gateway'
     severity: warn
