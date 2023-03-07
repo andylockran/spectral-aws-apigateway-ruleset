@@ -6,13 +6,13 @@ module.exports = {
   },
   mode: "production",
   // experiments: {
-  //   executeModule: false,
-  //   outputModule: true,
-  //   syncWebAssembly: false,
-  //   topLevelAwait: false,
-  //   asyncWebAssembly: true,
-  //   layers: false,
-  //   lazyCompilation: false,
+  //   // executeModule: true,
+  //   // outputModule: true,
+  //   // syncWebAssembly: false,
+  //   // topLevelAwait: false,
+  //   // asyncWebAssembly: true,
+  //   // layers: false,
+  //   // lazyCompilation: false,
   // },
   output: {
     filename: "[name].js",
@@ -20,7 +20,7 @@ module.exports = {
     // library: {
     //   type: "module",
     //   export: ["validate_json"]
-    //}
+    // },
   },
   // externals: {
   //   "ajv": "require('ajv')"
