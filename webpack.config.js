@@ -16,7 +16,8 @@ module.exports = {
   // },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "functions")
+    path: path.resolve(__dirname, "functions"),
+    hashFunction: "xxhash64",
     // library: {
     //   type: "module",
     //   export: ["validate_json"]
