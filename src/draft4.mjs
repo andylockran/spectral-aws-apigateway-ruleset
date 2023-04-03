@@ -15,32 +15,35 @@ ajv.addKeyword("example"); // Added 'example' keyword as picked up by `aws-examp
 
 // };
 
-module.exports = (targetVal, _opts, context) => {
+var draft4 = (targetVal, _opts, context) => {
   let openapi = JSON.parse(JSON.stringify(targetVal));
   const results = [];
-
-  const schemaList = openapi.components.schemas;
-  for (const property in schemaList) {
-    if (Object.prototype.hasOwnProperty.call(schemaList, property)) {
-      const schema_model = schemaList[property];
-      schema_model.id = `#/components/schemas/${property}`;
-      try {
-        let schema = schemaList[property];
-        ajv.addSchema(schema);
-      } catch (error) {
-        console.log(`${property} failed to add due to ${error}`);
+  if (openapi.components.schemas) {
+    const schemaList = openapi.components.schemas;
+    for (const property in schemaList) {
+      if (Object.prototype.hasOwnProperty.call(schemaList, property)) {
+        const schema_model = schemaList[property];
+        schema_model.id = `#/components/schemas/${property}`;
+        try {
+          let schema = schemaList[property];
+          ajv.addSchema(schema);
+        } catch (error) {
+          console.log(`${property} failed to add due to ${error}`);
+        }
       }
     }
-  }
-  for (const property in schemaList) {
-    try {
-      ajv.compile(schemaList[property]);
-    } catch (error) {
-      results.push({
-        message: `${error}`,
-        path: ["components", "schemas", property],
-      });
+    for (const property in schemaList) {
+      try {
+        ajv.compile(schemaList[property]);
+      } catch (error) {
+        results.push({
+          message: `${error}`,
+          path: ["components", "schemas", property],
+        });
+      }
     }
   }
   return results;
 };
+
+export default draft4;
