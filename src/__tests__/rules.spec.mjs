@@ -59,7 +59,7 @@ beforeAll(async () => {
 // });
 
 describe("Testing each rule against example documents", () => {
-  test("testing the openapi rule", async () => {
+  test("aws-openapi-version should fail if the openapi version is set to 3.1.1", async () => {
     let badDocument = mutableTemplate;
     badDocument.openapi = "3.1.1";
     // we lint our document using the ruleset we passed to the Spectral object
@@ -70,7 +70,7 @@ describe("Testing each rule against example documents", () => {
     });
   });
 
-  test("aws-path-segments", async () => {
+  test("aws-path-segments should fail if the path contains spaces", async () => {
     let pathSegments = mutableTemplate;
     pathSegments.paths = {
       "this should not work as it has spaces": {
@@ -88,6 +88,29 @@ describe("Testing each rule against example documents", () => {
     // we lint our document using the ruleset we passed to the Spectral object
     spectral.run(pathSegments).then((spectralResultArray) => {
       expect(spectralResultArray).toFailWithRule({
+        code: "aws-path-segments",
+      });
+    });
+  });
+
+  test("aws-path-segments should not fail if the path is just a /", async () => {
+    let pathSegments = mutableTemplate;
+    pathSegments.paths = {
+      "/": {
+        post: {
+          tags: ["pet"],
+          summary: "uploads an image",
+          description: "",
+          operationId: "uploadFile",
+          consumes: ["multipart/form-data"],
+          produces: ["application/json"],
+        },
+      },
+    };
+
+    // we lint our document using the ruleset we passed to the Spectral object
+    spectral.run(pathSegments).then((spectralResultArray) => {
+      expect(spectralResultArray).not.toFailWithRule({
         code: "aws-path-segments",
       });
     });
