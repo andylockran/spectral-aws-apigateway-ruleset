@@ -164,6 +164,7 @@ components:
           type: integer
         message:
           type: string
+      additionalProperties: false
     ArrayOfError:
       type: "array"
       items: 
