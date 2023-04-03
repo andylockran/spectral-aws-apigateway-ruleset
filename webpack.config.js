@@ -17,10 +17,10 @@ module.exports = {
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "functions"),
-    // library: {
-    //   type: "module",
-    //   export: ["validate_json"]
-    // },
+    library: {
+      type: "this",
+      export: ["draft4"],
+    },
   },
   // externals: {
   //   "ajv": "require('ajv')"
