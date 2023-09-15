@@ -29,7 +29,7 @@ extends:
   - spectral-aws-apigateway-ruleset
 ```
 
-This pulls the definition directly from npm, do you don't have to even install it!
+This pulls the definition directly from npm, so you don't have to even install it!
 
 ## NPM package
 
