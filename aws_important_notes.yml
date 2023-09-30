@@ -1,6 +1,9 @@
 functions:
   - draft4
 # These rules are a codified representation of https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html
+extends: spectral:oas
+formats: 
+  - "oas3_0"
 rules:
   aws-openapi-version:
     description: "OpenAPI version must be 3.0.1.  This is the version set when the API is exported from the REST interface."
