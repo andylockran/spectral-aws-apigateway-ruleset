@@ -1,6 +1,6 @@
 {
   "name": "spectral-aws-apigateway-ruleset",
-  "version": "1.7.12",
+  "version": "2.0.0",
   "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
   "main": "aws_important_notes.yml",
   "scripts": {
