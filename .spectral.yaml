@@ -1,2 +1,2 @@
 extends:
-  - spectral-aws-apigateway-ruleset
+  - "spectral:oas"
