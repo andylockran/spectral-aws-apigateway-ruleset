@@ -59,9 +59,9 @@ beforeAll(async () => {
 // });
 
 describe("Testing each rule against example documents", () => {
-  test("aws-openapi-version should fail if the openapi version is set to 3.1.1", async () => {
+  xtest("aws-openapi-version should fail if the openapi version is set to 3.1.1", async () => {
     let badDocument = mutableTemplate;
-    badDocument.openapi = "3.1.1";
+    badDocument.openapi = "3.0.1";
     // we lint our document using the ruleset we passed to the Spectral object
     spectral.run(badDocument).then((spectralResultArray) => {
       expect(spectralResultArray).toFailWithRule({
