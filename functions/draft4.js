@@ -547,7 +547,7 @@ var require_codegen = __commonJS({
     var Else = class extends BlockNode {
     };
     Else.kind = "else";
-    var If = class extends BlockNode {
+    var If = class _If extends BlockNode {
       constructor(condition, nodes) {
         super(nodes);
         this.condition = condition;
@@ -570,10 +570,10 @@ var require_codegen = __commonJS({
         }
         if (e) {
           if (cond === false)
-            return e instanceof If ? e : e.nodes;
+            return e instanceof _If ? e : e.nodes;
           if (this.nodes.length)
             return this;
-          return new If(not(cond), e instanceof If ? [e] : e.nodes);
+          return new _If(not(cond), e instanceof _If ? [e] : e.nodes);
         }
         if (cond === false || !this.nodes.length)
           return void 0;
