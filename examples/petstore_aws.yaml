@@ -194,3 +194,10 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  securitySchemes:
+    encryptedScheme:
+      type: oauth2
+
+security:
+  - oauth2: []
+  
