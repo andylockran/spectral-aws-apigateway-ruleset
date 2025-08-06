@@ -154,6 +154,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Pet'
+      maxItems: 10
     Error:
       type: "object"
       required:
@@ -169,6 +170,7 @@ components:
       type: "array"
       items: 
         $ref: "#/components/schemas/Error"
+      maxItems: 10
   responses:
     BadRequest:
       description: The request was badly formed
