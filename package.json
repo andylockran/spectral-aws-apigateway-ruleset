@@ -2,8 +2,8 @@
   "name": "spectral-aws-apigateway-ruleset",
   "version": "2.2.0",
   "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
-  "main": "aws_important_notes.yml",
-  "type": "commonjs",
+  "type": "module",
+  "main": "./aws_important_notes.yml",
   "scripts": {
     "clean": "rm -rf functions/",
     "build": "./node_modules/.bin/esbuild src/draft4.mjs --bundle --outfile=functions/draft4.js --platform=node",
