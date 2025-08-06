@@ -1,15 +1,11 @@
-const path = require("path");
-const fs = require("fs");
-const yaml = require("js-yaml");
+import * as fs from "node:fs";
+import { join } from "path";
+import { readFileSync } from "fs";
+import { load, DEFAULT_SCHEMA } from "js-yaml";
 
-const { Spectral } = require("@stoplight/spectral-core");
-const { fetch } = require("@stoplight/spectral-runtime"); // can also use isomorphic-fetch, etc.. If you ruleset does not reference any external assets, you can provide some stub instead.
-const {
-  bundleAndLoadRuleset,
-} = require("@stoplight/spectral-ruleset-bundler/with-loader");
-const {
-  commonjs,
-} = require("@stoplight/spectral-ruleset-bundler/plugins/commonjs"); // needed if you want to use CommonJS
+import { Spectral } from "@stoplight/spectral-core";
+import { fetch } from "@stoplight/spectral-runtime"; // can also use isomorphic-fetch, etc.. If you ruleset does not reference any external assets, you can provide some stub instead.
+import { bundleAndLoadRuleset } from "@stoplight/spectral-ruleset-bundler/with-loader";
 
 expect.extend({
   toFailWithRule(received, argument) {
@@ -43,13 +39,13 @@ const spectral = new Spectral({});
 let mutableTemplate;
 
 beforeAll(async () => {
-  const rulesetFilepath = path.join(__dirname, ".spectral.yaml");
-  mutableTemplate = yaml.load(
-    fs.readFileSync("examples/petstore_aws.yaml", "utf8"),
-    { schema: yaml.DEFAULT_SCHEMA }
+  const rulesetFilepath = join(__dirname, "../../aws_important_notes.yml");
+  mutableTemplate = load(
+    readFileSync("examples/petstore_aws.yaml", "utf8"),
+    { schema: DEFAULT_SCHEMA }
   );
   spectral.setRuleset(
-    await bundleAndLoadRuleset(rulesetFilepath, { fs, fetch }, [commonjs()])
+    await bundleAndLoadRuleset(rulesetFilepath, { fs, fetch })
   );
   return spectral;
 });

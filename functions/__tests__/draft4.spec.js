@@ -1,24 +1,24 @@
 import draft4 from "../draft4";
-const yaml = require("js-yaml");
-const fs = require("fs");
-const AMV = require("apigw-model-validator");
+import { load, DEFAULT_SCHEMA } from "js-yaml";
+import { readFileSync } from "fs";
+import AMV from "apigw-model-validator";
 
 const validator = new AMV();
 
 describe("JSONSchema Compile All", () => {
   test("A schema should compile across all $refs", () => {
-    const input = yaml.load(
-      fs.readFileSync("examples/petstore_aws.yaml", "utf8"),
-      { schema: yaml.DEFAULT_SCHEMA }
+    const input = load(
+      readFileSync("examples/petstore_aws.yaml", "utf8"),
+      { schema: DEFAULT_SCHEMA }
     );
     const output = [];
     expect(draft4(input)).toEqual(output);
   });
 
   test("An object should match the schema", (done) => {
-    const input = yaml.load(
-      fs.readFileSync("examples/petstore_aws.yaml", "utf8"),
-      { schema: yaml.DEFAULT_SCHEMA }
+    const input = load(
+      readFileSync("examples/petstore_aws.yaml", "utf8"),
+      { schema: DEFAULT_SCHEMA }
     );
     const pet = {
       name: "Django",

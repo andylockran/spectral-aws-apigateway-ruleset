@@ -2,12 +2,10 @@
   "name": "spectral-aws-apigateway-ruleset",
   "version": "2.2.0",
   "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
-  "main": "aws_important_notes.yml",
+  "type": "module",
+  "main": "./aws_important_notes.yml",
   "scripts": {
-    "clean": "rm -rf functions/",
-    "build": "./node_modules/.bin/esbuild src/draft4.mjs --bundle --outfile=functions/draft4.js --platform=node",
-    "test": "jest",
-    "test-build": "cp src/draft4.mjs functions/draft4.js && jest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -36,8 +34,7 @@
     "babel-jest": "^29.5.0",
     "jest": "^29.5.0",
     "jest-json-schema": "^6.1.0",
-    "js-yaml": "^4.1.0",
-    "esbuild": "^0.20.2"
+    "js-yaml": "^4.1.0"
   },
   "jest": {
     "verbose": true,
