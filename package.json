@@ -3,6 +3,7 @@
   "version": "2.2.0",
   "description": "A spectral ruleset to enforce the AWS API Gateway Important Notes",
   "main": "aws_important_notes.yml",
+  "type": "commonjs",
   "scripts": {
     "clean": "rm -rf functions/",
     "build": "./node_modules/.bin/esbuild src/draft4.mjs --bundle --outfile=functions/draft4.js --platform=node",
