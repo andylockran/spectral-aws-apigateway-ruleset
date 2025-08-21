@@ -1,0 +1,19 @@
+name: License scan on PR
+
+on: [pull_request]
+
+jobs:
+  compliance_check:
+    runs-on: ubuntu-latest
+    name: Perform license scan
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: License check
+      id: compliance
+      uses: fossology/fossology-action@v1
+      with:
+        scan_mode: ''
+        scanners: 'nomos ojo'
+        report_format: 'SPDX_JSON'
